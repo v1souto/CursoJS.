@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questionário</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="question">Pergunta aqui</h2>
+    <input type="text" id="answer" placeholder="Digite sua resposta...">
+    <button onclick="nextQuestion()">Próxima</button>
+  </div>
+
+  <script>
+    const questions = [
+      "Qual é o seu nome?",
+      "Quantos anos você tem?",
+      "Qual é sua cor favorita?",
+      "Qual é seu hobby?"
+    ];
+
+    let currentQuestion = 0;
+    const answers = [];
+
+    function nextQuestion() {
+      const input = document.getElementById('answer');
+      const questionEl = document.getElementById('question');
+
+      if (input.value.trim() === '') {
+        alert('Por favor, responda antes de continuar!');
+        return;
+      }
+
+      answers.push(input.value);
+      input.value = '';
+
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        questionEl.textContent = questions[currentQuestion];
+      } else {
+        document.querySelector('.container').innerHTML = `
+          <h2>Questionário finalizado!</h2>
+          <p>Obrigado por responder 😊</p>
+        `;
+        console.log(answers);
+      }
+    }
+
+    // Inicializa
+    document.getElementById('question').textContent = questions[currentQuestion];
+  </script>
+</body>
+</html>
